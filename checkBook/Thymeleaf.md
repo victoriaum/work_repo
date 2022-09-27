@@ -7,3 +7,4 @@
   This will only be displayed if authenticated user has role ROLE_ADMIN.
 </div>
 ```
+
