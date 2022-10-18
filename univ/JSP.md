@@ -130,8 +130,82 @@
 ## 4장. JSP 동작 원리
 <hr>
 
+### JSP 처리과정
++ JSP 페이지 요청하면 웹 서버에서 ```.java```로 변환 후 ```.class```를 생성
+
+### 출력 버퍼와 응답
++ 출력 버퍼는 응답 결과의 임시 저장소, 응답을 만들 때 출력 버퍼에 기록하고 클라이언트에 전달
++ page 지시어의 ```autoFlush``` 속성이 ```true```라면, 버퍼를 비우고 전달(flush)
+  + ```false```인 경우 예외가 발생 -> 500 에러
+
+### 서블릿 프로그래밍
++ 자동으로 만들어지는 서블릿 클래스는 ```생성자, doGet(), doPost()```를 가지고 있음
++ 실제 서블릿을 실행하면 생성자, init(), service(), doGet(), doPost() 순으로 실행됨.
+  + 실행 URL : ```http://localhost:8080/JSP/HelloServlet```
+  ```html
+  <form action="HelloServlet" method="get"></form>
+  <form action="HelloServlet" method="post"></form>
+  
+  response.setContextType("text/html;charset="UTF-8");
+  request.setCharacterEncoding("UTF-8");
+  ```
+  
+### 정리하기
++ JSP 페이지에 대한 요청이 들어오면, JSP 페이지는 서블릿 프로그램으로 변환되고 컴파일되어 실행된 후, 그 결과가 클라이언트에 응답으로 전송한다.
++ 응답 결과를 즉시 전송하지 않고 임시로 출력 버퍼에 저장할 수 있다. 실행이 끝나거나 버퍼가 차면 클라이언트로 결과를 전송하여야 한다.
++ page 지시어를 통해 JSP 컨테이너에게 페이지의 속성과 실행 옵션을 알려줄 수 있다.
++ GET 방식 요청인가 POST 방식 요청인가에 따라 서블릿 클래스의 doGet( ) 또는 doPost( ) 메서드가 실행되어 요청이 처리된다.
+
+### 연습문제 정리
++ 서블릿 프로그램은 추상 클래스 HttpServlet을 상속받는 클래스를 작성한다.
++ ```service() 메소드```는 HTTP 요청 방식이 무엇이냐에 따라 적당한 메소드를 호출해 주는 기능을 하며 HttpServlet에 이미 정의되어 있다. ```재정의할 필요가 없다.```
+<br><br>
+
+
+
+
+
+## 5장. 요청과 응답
+<hr>
+
++ [Java EE API](https://docs.oracle.com/javaee/7/api/)
+
+### request 내장 객체
++ HttpServletRequest 유형
++ 클라이언트의 요청 관련 정보를 얻을 수 있다.
+
+### response 내장 객체
++ HttpServletResponse 유형
++ 클라이언트에 응답을 제공하기 위해 구현한 객체
++ ```response.sendRedirect(String location)```
+  + 웹 서버가 웹 브라우저에게 다른 페이지로 이동하라고 지시하는 것
+  + 요청에 대한 임시 응답이 가고, 브라우저가 재차 URL을 요청하게 됨.
+  + ```<jsp:forward>```와 차이가 있음.
+
+### 정리하기
++ request 내장 객체는 클라이언트와 서버의 정보, 클라이언트가 전달하는 데이터, 요청 헤더와 쿠키 등의 읽기 기능을 제공한다.
++ GET은 요청 URL에 전송할 파라미터를 붙여서 전송하는 방식이고, POST 방식은 요청 몸체에 파라미터를 넣어 전송한다.
++ 클라이언트로부터 전송된 파라미터가 하나의 값을 가질 때는 request.getParameter() 메서드를 사용하여 읽고, 여러 값을 가질 수 있다면 getParameterValues() 메서드를 사용하여야 한다.
++ 톰캣에서 POST 방식으로 전달된 파라미터를 읽기 전에 request.setCharacterEncoding(charset) 메서드를 이용하여 디코딩할 때 사용할 charset을 지정해야 한다.
++ response 객체를 이용하여 다른 페이지로 이동, 상태 코드 설정, 응답 헤더 설정, 쿠키 추가 등을 할 수 있으며 응답 몸체를 만들기 위한 출력 스트림을 얻을 수 있다.
+
+### 연습문제 정리
++ 응답을 만들 때 사용되는 객체는 response 객체이다.
+<br><br>
+
+
+
+
+
+## 6장. 내장 객체와 Scope
+<hr>
+
+### 
++
+
 ### 정리하기
 + 
 
 ### 연습문제 정리
-+ 
++
+<hr>
