@@ -12,3 +12,4 @@
 + pseudo-code
   + :blank, :first, :left, :right
 + <span style="color:red">Safari, Firefox doesn't work</span>
++ 
