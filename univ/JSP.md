@@ -227,6 +227,29 @@
 + 특정 웹 애플리케이션에 포함된 모든 JSP 페이지는 하나의 application 객체를 공유함.
 + web.xml에 저장된 설정 정보의 조회
 
+### out 내장객체
++ print(인자)는 인자를 꼭 필요로 한다. println()은 없어도 됨.
++ 버퍼 관련 메서드
+  + clear(), clearBuffer()
+    + 버퍼가 비워져 있어도 clearBuffer()는 IOException을 발생시키지 않는다.
+  + flush()
+    + 버퍼의 내용을 비워 출력시킴
+
+### 내장 객체와 영역
++ JSP 객체들은 scope 속성을 가짐 -> 영역 표시 속성은 ```page, request, session, application```이 존재 (크기순)
+1. page 영역: 1개의 JSP 페이지 내부, 내장 객체: ```pageContext```
+2. request 영역: 같은 요청을 처리하는 페이지들로 이루어짐, ```<jsp:forword>``` 또는 ```<jsp:include>```를 사용할 때, 내장 객체: ```request```
+3. session 영역: 일련의 요청을 처리하는 페이지들로 이루어짐, 세션은 하나의 웹브라우저에서 유지됨, 내장 객체: ```session```
+4. application 영역: 1개의 웹 애플리케이션 전체 영역, 웹 컨테이너를 다시 시작하면 기존 영역이 없어진 후 다시 만들어짐, 내장 객체: ```application```
+
+### 속성을 이용한 데이터 공유
++ 데이터 공유 방법
+  + 새로운 속성을 정의하여 사용
+    + 속성은 <이름, 값> 형태 
+    + ```setAttribute(String name, String Value)```
+    + ```getAttribute(String name)```
+    + ```removeAttribute(String name)```
+
 ### 정리하기
 + 내장 객체는 JSP 컨테이너가 자동으로 만들어 제공하므로 자유롭게 사용할 수 있다.
 + pageContext 객체는 하나의 JSP 페이지와 1:1로 대응되는 객체로서 JSP 페이지에서 사용되는 내장 객체를 리턴하는 메서드를 제공한다.
@@ -236,5 +259,22 @@
 + request 영역은 한 번의 요청을 처리하기 위한 JSP 페이지들, session 영역은 세션이 생성되어 브라우저가 종료될 때 까지 사용되는 JSP 페이지들, application 영역은 웹 애플리케이션에 포함된 모든 JSP 페이지들로 구성된다.
 
 ### 연습문제 정리
-+ 
++ application 내장 객체는 ServletContext 유형의 객체
+<br><br>
+
+
+
+
+## 7장. 모듈화된 JSP 페이지 만들기
 <hr>
+
+### 
++
+
+
+### 정리하기
++ 
+
+### 연습문제 정리
++ 
+<br><br>
