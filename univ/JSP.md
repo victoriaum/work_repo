@@ -200,12 +200,41 @@
 ## 6장. 내장 객체와 Scope
 <hr>
 
-### 
-+
+### 내장 객체
++ 객체의 종류
+  + 사용자 정의 객체
+    + ```<jsp:useBean>``` 이나 스크립트릿을 통해 선언한 객체
+  + JSP 내장 객체
+    + request, response, pageContext, session, application, out, config, page, exception
+
+### page 내장 객체
++ 페이지별로 page 영역을 관리하는 객체
+
+### application 내장 객체
++ 특정 웹 애플리케이션에 포함된 모든 JSP 페이지는 하나의 application 객체를 공유함.
++ web.xml에 저장된 설정 정보의 조회
+  ```xml
+  <web-app>
+    <context-param>
+        <description>파라미터 설명</description>    
+        <param-name>파라미터 이름</param-name>    
+        <param-value>파라미터 값</param-value>    
+    </context-param>
+  </web-app>
+  ```
+
+### application 내장 객체
++ 특정 웹 애플리케이션에 포함된 모든 JSP 페이지는 하나의 application 객체를 공유함.
++ web.xml에 저장된 설정 정보의 조회
 
 ### 정리하기
-+ 
++ 내장 객체는 JSP 컨테이너가 자동으로 만들어 제공하므로 자유롭게 사용할 수 있다.
++ pageContext 객체는 하나의 JSP 페이지와 1:1로 대응되는 객체로서 JSP 페이지에서 사용되는 내장 객체를 리턴하는 메서드를 제공한다.
++ application 객체는 웹 애플리케이션의 정보를 저장하고 관리하는 객체로서 특정 웹 애플리케이션에 포함된 모든 JSP 페이지는 하나의 application 객체를 공유한다.
++ 웹 애플리케이션 폴더의 WEB-INF 폴더에 있는 web.xml 파일은 웹 애플리케이션의 설정 파일로서 초기화 파라미터, 서블릿과 서블릿 매핑 등의 설정 정보를 포함한다.
++ JSP 페이지에서 브라우저로 보낼 결과의 출력을 위해 out.print( )나 out.println( )을 사용한다.
++ request 영역은 한 번의 요청을 처리하기 위한 JSP 페이지들, session 영역은 세션이 생성되어 브라우저가 종료될 때 까지 사용되는 JSP 페이지들, application 영역은 웹 애플리케이션에 포함된 모든 JSP 페이지들로 구성된다.
 
 ### 연습문제 정리
-+
++ 
 <hr>
