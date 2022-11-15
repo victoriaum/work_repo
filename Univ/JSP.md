@@ -373,17 +373,33 @@
 ## 10장. 자바 빈 사용하기
 <hr>
 
-### 
-+ 
+### 자바빈
++ JSP 요소들과 맞물려 사용 가능한 사용자 정의 자바 클래스
++ 비지니스 로직과 프레젠테이션 로직의 분리
++ 자바빈 설계 규약 ```get 메서드```, ```set 메서드```
++ 관련 액션 태그
+```html
+< jsp:useBean id=“자바빈이름” class=“패키지.클래스이름” scope=“범위” / >
+< jsp:setProperty name=“자바빈이름” property=“속성이름” value=“속성” / >
+< jsp:getProperty name=“자바빈이름” property=“속성이름” / >
+```
 
 ### 정리하기
-+ 
++ 자바빈 설계규약에 따라 정의된 자바빈을 사용하면 비즈니스 로직과 프레젠테이션 로직을 분리할 수 있다.
++ 자바빈 객체는 스크립트 요소, 커스텀 태그, 표현 언어에서 변수로 사용된다.
++ 자바빈은 별도의 클래스 파일로 존재하기 때문에 여러 JSP 페이지에서 재사용될 수 있다.
++ 자바빈 클래스의 모든 속성에 대해 기본적으로는 getter 메서드와 setter 메서드를 정의해야 한다.
++ < jsp:useBean > 태그의 형식은 < jsp:useBean id=“빈이름” class=“패키지.클래스이름” scope=“범위” / >이다.
++ < jsp:setProperty >, < jsp:getProperty > 액션 태그를 사용하여 자바빈 객체의 속성 값을 설정하거나 읽어올 수 있다.
+
 ### 연습문제 정리
-+ 
++ 자바빈 객체의 사용범위가 request이므로 해당 영역에 속한 페이지들에서 공유될 수 있다.
++ ```html
+  // 동일한 의미
+  <% out.print(memberinfo.getName( )); %>
+  <jsp:getProperty name=“memberinfo” property=“name” />  
+  ```
 <br><br>
-
-
-
 
 
 
@@ -391,11 +407,60 @@
 ## 11장. JDBC를 이용한 데이터베이스 프로그래밍
 <hr>
 
-### 
-+
+### 데이터베이스 스키마
++ 자료의 구조, 자료 간의 관계에 관한 정의
+
+### MariaDB
++ 자바커넥터 다운로드
+  + DBMS 제조사에서 제공함 ex) MariaDB Connector
+```roomsql
+show database;
+create database 데이터베이스 이름;
+create user user@localhost ~;
+grant all privileges on my_db.* to user@localhost with grant option;
+flush privileges;
+```
+```html
+try(
+    Connection con = DriverManager.getConnection(url, user, pw);
+    Statement stmt = con.createStatement();
+    ResultSet rs = stmt.executeQuery("select * from member");
+){
+}
+```
 
 ### 정리하기
-+
++ 관계형 DBMS에서는 데이터를 테이블 형태로 저장한다.
++ SQL은 관계형 데이터베이스에서 데이터를 정의하고 조작하기 위한 표준 언어이다.
++ JDBC는 자바 프로그램에서 관계형 데이터베이스에 연결하고, 저장된 데이터에 접근하기 위한 API 규격이다.
++ Connection, Statement 및 ResultSet 객체를 생성할 때는 try-with-resources 구문을 사용하는 것이 편리하다.
++ select 구문을 실행할 때는 Statement 인터페이스의 executeQuery( ) 메서드를 사용하고, insert/update/delete 구문을 실행할 때는 executeUpdate( ) 메서드를 사용한다.
++ ResultSet 객체를 사용하여 select 구문의 실행 결과를 다룰 수 있다.
+
 ### 연습문제 정리
-+
++ DBMS와 연결, Statement 객체 생성, SQL 질의 실행, ResultSet 객체 처리, 연결 종료
++ ```ResultSet getResultSet()``` SQL 구문 가운데 insert, delete와 update를 실행하려고 하려고 할 때 사용되는 메서드
+<br><br>
+
+
+
+
+  
+## 12장. DAO와 DTO
+<hr>
+
+### DAO와 DTO의 효과
++ 코드 중복 최소화
++ JSP 프로그램에 SQL 구문이 나타나지 않음
+
+### 정리하기
++ DTO와 DAO는 자바로 작성된 클래스이다.
++ DTO는 테이블을 구성하는 필드에 대응되는 속성(멤버 변수)을 가지며 각 속성들에 대한 getter와 setter 메서드로 구성된다.
++ DTO 객체는 한 개의 레코드에 해당하며 DAO 메소드를 통해 DBMS와 데이터를 주고받을 때 사용한다.
++ DAO는 DBMS 연결이나 SQL 구문 실행 등에 필요한 메서드로 구성되고, JSP 프로그램에서 DBMS와 연동할 때 사용된다.
++ DAO와 DTO를 사용하면 JSP의 스크립크릿에서 DBMS 연결 정보와 SQL 구문 등을 감출 수 있다.
+
+### 연습문제 정리
++ DTO 객체는 DBMS에 연결한 후, SQL 구문을 실행하거나 결과를 리턴받을 때 필요하다.
++ ```ArrayList<MemberDTO> mbList = new MemberDAO().selectAll();```
 <br><br>
